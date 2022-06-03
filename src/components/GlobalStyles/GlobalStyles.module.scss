@@ -3,7 +3,8 @@
 
 :root {
     --primary: #fe2c55;
-
+    --color-black: #000000;
+    --color-white: #fff;
     // config
     --default-layout-width: 1150px;
     --default-layout-header-height: 60px;
@@ -26,6 +27,11 @@ body {
   text-rendering: optimizeSpeed;
 }
 
-h1{
-    color: var(--primary)
+button, input{
+    border: none;
+    outline: none;
+}
+a{
+    text-decoration: none;
+    color: var(--color-black);
 }

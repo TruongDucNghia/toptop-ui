@@ -1,5 +1,5 @@
 import React from 'react';
-import './GlobalStyles.scss';
+import './GlobalStyles.module.scss';
 const GlobalStyles = ({ children }) => {
   return children;
 };
