@@ -27,11 +27,18 @@ const Header = () => {
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
             title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    { code: 'en', title: 'English' },
+                    { code: 'vi', title: 'VietNames' },
+                ],
+            },
         },
         {
             icon: <FontAwesomeIcon icon={faCircleQuestion} />,
             title: 'FeedBack and Help',
-            to: '/feedback'
+            to: '/feedback',
         },
         {
             icon: <FontAwesomeIcon icon={faKeyboard} />,
@@ -47,7 +54,6 @@ const Header = () => {
                 </div>
                 <Tippy
                     interactive
-                    visible={searchResult.length > 0}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PopperWrapper>
