@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+    faBitcoinSign,
     faCircleQuestion,
     faCircleXmark,
+    faCloudArrowUp,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMagnifyingGlass,
+    faPager,
+    faSignOut,
     faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
+import {faPaperPlane, faMessage, faUser} from '@fortawesome/free-regular-svg-icons'
 import 'tippy.js/dist/tippy.css';
-import Tippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 
 import styles from './header.module.scss';
 import images from '../../../../assets/images';
@@ -22,6 +29,7 @@ import Menu from '../../../Popper/Menu';
 
 const cx = classNames.bind(styles);
 const Header = () => {
+    const current_user = true;
     const [searchResult, setSearchResult] = useState([1, 2, 3]);
     const MENU_ITEM = [
         {
@@ -46,13 +54,34 @@ const Header = () => {
         },
     ];
 
+    const USER_ITEM = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faBitcoinSign} />,
+            title: 'Get coins',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Setting',
+        },
+        ...MENU_ITEM,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            border_top: true
+        },
+    ]
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
                     <img src={images.logo.default} alt="TopTop" />
                 </div>
-                <Tippy
+                <HeadlessTippy
                     interactive
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -76,14 +105,40 @@ const Header = () => {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 <div className={cx('actions')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log In</Button>
-                    <Menu items={MENU_ITEM}>
-                        <button className={cx('btn-menu')}>
+                    {current_user ? (
+                        <>
+                            <Tippy content="Upload video" placement='bottom'>
+                                <button>
+                                    <FontAwesomeIcon icon={faCloudArrowUp}/>
+                                </button>
+                            </Tippy>
+                            <Tippy content="Message" placement='bottom'>
+                                <button>
+                                    <FontAwesomeIcon icon={faPaperPlane} />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Inbox" placement='bottom'>
+                                <button>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log In</Button>
+                        </>
+                    )}
+                    <Menu items={current_user ? USER_ITEM : MENU_ITEM}>
+                        {current_user ? (
+                            <img className={cx('avatar-header')} src='https://res.cloudinary.com/dbpw1enlu/image/upload/v1654443076/121165674_361554678528058_7348982528906617908_n_imafs0.jpg' alt='Trương Đức Nghĩa'/>
+                        ) : (
+                            <button className={cx('btn-menu')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
+                        )}
                     </Menu>
                 </div>
             </div>

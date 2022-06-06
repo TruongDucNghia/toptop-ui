@@ -13,6 +13,24 @@
     padding: 0px 24px;
     justify-content: space-between;
 }
+.actions{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    button{
+        background-color: transparent;
+        font-size: 1.7rem;
+        color: #161823;
+        cursor: pointer;
+    }
+    .avatar-header{
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}
 
 // .logo {
 
